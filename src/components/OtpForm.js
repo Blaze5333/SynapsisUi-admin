@@ -38,25 +38,25 @@ export default function OTPForm({route}) {
             where("email", "==", email),
             where("used", "==", 0)
           );
+          const querySnapshot = await getDocs(q);
+          console.log(querySnapshot.docs[0].id)
+          const resp=querySnapshot.docs[0].data()
+          console.log(resp)
+          if (!resp){
+            alert("Invalid OTP")
+            return;
+          }
+          else if(resp.expiresIn > Date.now()){
+            await updateDoc(doc(db, "otp", querySnapshot.docs[0].id), { used: 1 });
+            router.push(`/content`);
+            return;
+          }
+          else
+          {
+            alert("OTP expired");
+            return;
+          }
           
-          const docSnap = onSnapshot(q, async (response) => {
-        
-            if (response.empty) {
-              alert("Invalid OTP")
-              
-              return;
-            }
-            const data1 = response.docs[0].data();
-            if (data1.expiresIn > Date.now()) {
-              await updateDoc(doc(db, "otp", response.docs[0].id), { used: 1 });
-             
-              router.push(`/content`);
-              return;
-            } else {
-              alert("OTP expired");
-              return;
-            }
-          });
     } catch (error) {
       console.error('Error verifying OTP:', error);
       alert('Invalid OTP. Please try again.');
