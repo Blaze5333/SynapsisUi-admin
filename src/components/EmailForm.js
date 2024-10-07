@@ -23,7 +23,7 @@ export default function EmailForm() {
       const date=new Date()
 
       addDoc(collection(db,"otp"),{email:email,otp:data.otp,used:0,expiresIn:Date.now()+5*1000*60}).then(()=>{
-        router.push('/otp/'+email,{email});
+        router.push('/otp/'+email);
       }).catch(()=>{
 
       })
