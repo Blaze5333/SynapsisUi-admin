@@ -47,9 +47,10 @@ export default function OTPForm({route}) {
             return;
           }
           else if(resp.expiresIn > Date.now()){
+            console.log("OTP verified");
             await updateDoc(doc(db, "otp", querySnapshot.docs[0].id), { used: 1 });
             router.push(`/content`);
-            return;
+            
           }
           else
           {

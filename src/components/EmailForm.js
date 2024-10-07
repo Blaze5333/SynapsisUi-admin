@@ -13,7 +13,9 @@ export default function EmailForm() {
   const router = useRouter();
   const db=getFirestore(app)
   const handleSubmit = async (e) => {
+    console.log(process.env.NEXT_PUBLIC_ADMIN)
     if(!process.env.NEXT_PUBLIC_ADMIN.includes(email)){
+
         return alert("You are not authorized to use this service")
     }
     e.preventDefault();
