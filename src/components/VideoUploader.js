@@ -21,6 +21,7 @@ export default function MobileComponentUploaderAdmin() {
   const [dependencies, setDependencies] = useState('');
   const [video, setVideo] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
+  const [fileCode, setfileCode] = useState('')
   const db=getFirestore(app)
   const [progressBar, setprogressBar] = useState(0)
   const handleVideoChange = (e) => {
@@ -55,6 +56,7 @@ export default function MobileComponentUploaderAdmin() {
                         name:componentName,
                         category:componentFamily,
                         videoSrc:downloadURL,
+                        fileCode:fileCode,
                         code:[
                             {
                                 "language":"terminal",
@@ -115,6 +117,19 @@ export default function MobileComponentUploaderAdmin() {
           value={componentCode}
           onChange={(e) => setComponentCode(e.target.value)}
           placeholder="Paste the component code here"
+          rows={20}
+          required
+          
+          className="w-full px-3 py-2 border border-gray-300 rounded-md"
+        />
+      </div>
+      <div className="space-y-2">
+        <label htmlFor="component-code" className="block text-sm font-medium">File Code</label>
+        <textarea
+          id="component-code"
+          value={fileCode}
+          onChange={(e) => setfileCode(e.target.value)}
+          placeholder="Paste the File code here"
           rows={20}
           required
           
