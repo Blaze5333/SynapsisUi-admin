@@ -22,6 +22,7 @@ export default function MobileComponentUploaderAdmin() {
   const [video, setVideo] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [fileCode, setfileCode] = useState('')
+   const[isNew,setisNew]=useState("") 
   const db=getFirestore(app)
   const [progressBar, setprogressBar] = useState(0)
   const handleVideoChange = (e) => {
@@ -57,6 +58,7 @@ export default function MobileComponentUploaderAdmin() {
                         category:componentFamily,
                         videoSrc:downloadURL,
                         fileCode:fileCode,
+                        isNew
                         code:[
                             {
                                 "language":"terminal",
@@ -148,6 +150,17 @@ export default function MobileComponentUploaderAdmin() {
           className="w-full px-3 py-2 border border-gray-300 rounded-md"
         />
       </div>
+      <div className="space-y-2">
+        <label htmlFor="component-family" className="block text-sm font-medium">Is New</label>
+        <input
+          id="component-family"
+          type="text"
+          value={isNew}
+          onChange={(e) => setisNew(e.target.value)}
+          placeholder="Enter true to set new tag else leave it empty"
+          className="w-full px-3 py-2 border border-gray-300 rounded-md"
+        />
+      </div>     
 
       <div className="space-y-2">
         <label htmlFor="video-upload" className="block text-sm font-medium">Upload Component Video</label>
