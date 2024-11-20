@@ -58,7 +58,7 @@ export default function MobileComponentUploaderAdmin() {
                         category:componentFamily,
                         videoSrc:downloadURL,
                         fileCode:fileCode,
-                        isNew
+                        isNew,
                         code:[
                             {
                                 "language":"terminal",
